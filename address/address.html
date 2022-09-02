@@ -1,0 +1,161 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<style>
+  table,
+  th,
+  td,
+  tr {
+    border: 1px solid black;
+  }
+
+  th,
+  td {
+    padding: 10px;
+  }
+
+  li {
+    list-style-type: none;
+    ;
+  }
+
+  .button {
+    text-align: center;
+  }
+</style>
+
+<body>
+  <div>
+    <button class="btn btn-primary btn-lg" id="addAddress" style='margin-top: 2ch; margin-bottom: 2ch; margin-left: 2ch; '>Add
+      Address</button>
+  </div>
+  <div class="containerAddress" style="display: none;" id="form">
+    <div class="row mx-0 justify-content-center">
+      <div class="col-md-7 col-lg-5 px-lg-2 col-xl-4 px-xl-0 px-xxl-3">
+
+        <form class="form">
+          <input type="hidden" class="form-control" id="adID">
+
+          <label class="d-block mb-4">
+            <span class="form-label d-block">Address line</span>
+            <input name="address1" type="text" class="form-control" placeholder="Address line " id="adresline" />
+          </label>
+
+          <label class="d-block mb-4">
+            <span class="form-label d-block">City</span>
+            <input name="city" type="text" class="form-control" placeholder="City" id="adcity" />
+          </label>
+
+          <label class="d-block mb-4">
+            <span class="form-label d-block">State</span>
+            <input name="state" type="text" class="form-control" placeholder="State" id="adstate" />
+          </label>
+
+          <label class="d-block mb-4">
+            <span class="form-label d-block">Zip Code</span>
+            <input name="zip" type="text" class="form-control" placeholder="Zip Code" id="adzip" />
+          </label>
+
+          <label class="d-block mb-4">
+            <span class="form-label d-block">Country</span>
+            <input name="country" type="text" class="form-control" placeholder="Country" id="adcountry" />
+          </label>
+          <div class="mb-3">
+            <input type="submit" class="btn btn-primary" value="Submit" id="subBTn">
+
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <table class="table" id="myTable">
+    <tr>
+      <th>ID</th>
+      <th>Address Line</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip code</th>
+      <th>Country</th>
+    </tr>
+    <tr>
+      <ul>
+        <td>
+          <li id="AddressID"></li>
+        </td>
+        <td>
+          <li id="addressLine"></li>
+        </td>
+        <td>
+          <li id="city"></li>
+        </td>
+        <td>
+          <li id="state"></li>
+        </td>
+        <td>
+          <li id="zip"></li>
+        </td>
+
+        <td>
+          <li id="country"></li>
+        </td>
+      </ul>
+    </tr>
+  </table>
+  <script>
+    $(function () {
+      $('#addAddress').click(function () {
+        $('.containerAddress').toggle();
+      });
+    });
+
+    let form = document.getElementById("form")
+    form.addEventListener('submit', function (e) {
+
+      let idnum = document.getElementById('adID').value
+      let addline = document.getElementById('adresline').value
+      let addcity = document.getElementById('adcity').value
+      let addstate = document.getElementById('adstate').value
+      let addzip = document.getElementById('adzip').value
+      let addcountry = document.getElementById('adcountry').value
+
+      if (idnum == '') {
+        let url = "http://localhost:3000/addAddress";
+        let params = {
+          addressLine: addline,
+          city: addcity,
+          state: addstate,
+          zip: addzip,
+          country: addcountry
+        }
+        let Type = 'POST';
+     }
+      fetch(url, {
+        method: Type,
+        body: JSON.stringify(params),
+        headers: {
+          "content-Type": "application/json; charset=UTF-8"
+        }
+      })
+        .then(function (response) {
+          return response.json()
+        })
+        .then((data) => {
+          let results = document.getElementById('results');
+        })
+    })
+
+  </script>
+  <script src="./address.js"></script>
+</body>
+</html>

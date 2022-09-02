@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<style>
+    table,
+    th,
+    td,
+    tr {
+        border: 1px solid black;
+    }
+
+    th,
+    td {
+        padding: 10px;
+    }
+
+    li {
+        list-style-type: none;
+        ;
+    }
+
+    .button {
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div>
+        <button class="btn btn-primary btn-lg" id="subjectBtn"
+            style='margin-top: 2ch; margin-bottom: 2ch; margin-left: 2ch; '>Add Subject</button>
+    </div>
+    <div class="subjectDiv" style="display: none;" id="form">
+        <div>
+            <h1>subject button details</h1>
+        </div>
+   
+        <form class="form">
+            <p>
+                <input type="hidden" id="subjectId">
+                Subject :
+                <input type="text" class="subjects" id="SubjectsStudent">
+            </p>
+            <p>
+                Total Marks :
+                <input type="text" class="Total" id="total">
+            </p>
+            <p>
+                Marks Obtain :
+                <input type="text" class="Obtain" id="Obtain">
+            </p>
+            <p>
+                Passing Marks :
+                <input type="text" class="passing" id="Passing">
+            </p>
+            <input type="submit" class="btn btn-primary" value="Submit" id="subBTn">
+
+        </form>
+    </div>
+    <table class="table " id="myTable">
+        <tr>
+            <th>Sub ID</th>
+            <th>Subject</th>
+            <th>Total Marks</th>
+            <th>Marks Obtain</th>
+            <th>Passing Marks</th>
+        </tr>
+        <tr>
+            <ul>
+                <td>
+                    <li id="subId"></li>
+                </td>
+                <td>
+                    <b>
+                        <li id="allSub"></li>
+                    </b>
+                </td>
+                <td>
+                    <li id="totalMarks"></li>
+                </td>
+                <td>
+                    <li id="marksObtain"></li>
+                </td>
+                <td>
+                    <li id="marksPassing"></li>
+                </td>
+            </ul>
+        </tr>
+    </table>
+
+    <script>
+        $(function () {
+            $('#subjectBtn').click(function () {
+                $('.subjectDiv').toggle();
+            });
+        });
+
+        let form = document.getElementById('form')
+        form.addEventListener('submit', (e) => {
+
+            let mID = document.getElementById('subjectId').value
+            let msubject = document.getElementById('SubjectsStudent').value
+            let mtotal = document.getElementById('total').value
+            let mobtain = document.getElementById('Obtain').value
+            let mpassing = document.getElementById('Passing').value
+
+            if (mID == '') {
+                let url = "http://localhost:3000/addSub";
+                let params = {
+                    subject: msubject,
+                    totalMarks: mtotal,
+                    marksObtain: mobtain,
+                    passingMarks: mpassing,
+                }
+                let Type = 'POST';
+            }
+            fetch(url, {
+                method: Type,
+                body: JSON.stringify(params),
+                headers: {
+                    "content-Type": "application/json; charset=UTF-8"
+                }
+            }).then((res) => {
+                return res.json()
+            }).then((data) => {
+                let result = document.getElementById('result')
+            })
+        })
+    </script>
+    <script src="./subject.js"></script>
+
+</body>
+
+</html>

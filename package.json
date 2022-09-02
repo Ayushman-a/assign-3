@@ -1,0 +1,16 @@
+{
+  "name": "assign3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "mongoose": "^6.4.6",
+    "nodemailer": "^6.7.7"
+  },
+  "description": ""
+}
